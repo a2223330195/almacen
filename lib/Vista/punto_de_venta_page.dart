@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:almacen/Modelo/producto.dart';
 import 'package:almacen/Vista/altas_page.dart';
+import 'package:almacen/Vista/bajas_page.dart';
+import 'package:almacen/Vista/buscar_page.dart';
 import 'package:almacen/Vista/listado_page.dart';
-import 'package:almacen/Controlador/controlador_venta.dart';
+import 'package:almacen/Modelo/producto_modelo.dart';
+import 'package:almacen/Controlador/ver_productos_controller.dart';
 
 class PuntoDeVentaPage extends StatelessWidget {
-  final List<Producto> productos;
+  final VerProductosController verProductosController =
+      VerProductosController();
 
-  const PuntoDeVentaPage({Key? key, required this.productos}) : super(key: key);
+  PuntoDeVentaPage({Key? key, required List<Producto> productos})
+      : super(key: key) {
+    verProductosController.actualizarProductos();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +39,11 @@ class PuntoDeVentaPage extends StatelessWidget {
                 style: TextStyle(fontSize: 20),
               ),
               onPressed: () {
-                CarritoController()
-                    .agregarProducto(id: 'id', nombre: 'nombre', precio: 0.0);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => AltasPage(productos: productos)),
+                      builder: (context) => AltasPage(
+                          productos: verProductosController.productos.value)),
                 );
               },
             ),
@@ -56,7 +61,12 @@ class PuntoDeVentaPage extends StatelessWidget {
                 'Bajas',
                 style: TextStyle(fontSize: 20),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const BajasPage()),
+                );
+              },
             ),
             const SizedBox(height: 10),
             ElevatedButton(
@@ -72,7 +82,12 @@ class PuntoDeVentaPage extends StatelessWidget {
                 'Buscar',
                 style: TextStyle(fontSize: 20),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const BuscarPage()),
+                );
+              },
             ),
             const SizedBox(height: 10),
             ElevatedButton(
@@ -92,8 +107,8 @@ class PuntoDeVentaPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          VerProductosView(productos: productos)),
+                      builder: (context) => VerProductosView(
+                          productos: verProductosController.productos.value)),
                 );
               },
             ),
@@ -111,7 +126,9 @@ class PuntoDeVentaPage extends StatelessWidget {
                 'Salida',
                 style: TextStyle(fontSize: 20),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
           ],
         ),

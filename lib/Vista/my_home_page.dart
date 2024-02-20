@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:almacen/Modelo/producto.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:almacen/Vista/almacen_page.dart';
 import 'package:almacen/Vista/reportes_page.dart';
 import 'package:almacen/Vista/productos_page.dart';
+import 'package:almacen/Modelo/producto_modelo.dart';
 import 'package:almacen/Vista/punto_de_venta_page.dart';
-import 'package:almacen/Widgets/custom_button_home.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  MyHomePageState createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   List<Producto> productos = [
     Producto(
       id: '1',
@@ -86,15 +84,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               child: const Text('Salir'),
               onPressed: () => SystemNavigator.pop(),
-            ),
-            const SizedBox(height: 20),
-            CustomButtonHome(
-              name: 'Test Hive',
-              color: Colors.blue,
-              onPressed: () {
-                var productosBox = Hive.box('productos');
-                print('Productos: ${productosBox.values}');
-              },
             ),
           ],
         ),

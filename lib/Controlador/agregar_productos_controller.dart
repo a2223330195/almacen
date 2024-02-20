@@ -1,6 +1,9 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:almacen/Controlador/ver_productos_controller.dart';
 
 class AgregarProductosController {
+  final verProductosController = VerProductosController();
+
   void agregarProducto({
     required String id,
     required String nombre,
@@ -22,6 +25,24 @@ class AgregarProductosController {
       },
     );
 
-    // productos.delete(key)
+    // Actualizar la lista de productos
+    verProductosController.actualizarProductos();
+  }
+
+  void eliminarProducto(String idProducto) {
+    // Cambio de String a int
+    var productos = Hive.box('productos');
+    productos.delete(idProducto);
+
+    // Verificar la eliminación
+    var producto = productos.get(idProducto);
+    if (producto == null) {
+      print('Producto eliminado correctamente');
+    } else {
+      print('Error al eliminar el producto');
+    }
+
+    // Actualizar la lista de productos
+    verProductosController.actualizarProductos();
   }
 }

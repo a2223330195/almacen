@@ -1,4 +1,4 @@
-import 'producto.dart';
+import 'package:almacen/Modelo/producto_modelo.dart';
 
 class Venta {
   int id;

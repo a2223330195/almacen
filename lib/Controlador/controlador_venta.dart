@@ -1,6 +1,5 @@
 import 'dart:math';
-import 'package:almacen/Modelo/producto.dart';
-
+import 'package:almacen/Modelo/producto_modelo.dart';
 
 class CarritoController {
   List<Producto> productos = [];

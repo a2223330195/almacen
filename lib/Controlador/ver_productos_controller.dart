@@ -1,22 +1,32 @@
-import 'package:almacen/Modelo/producto.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
+import 'package:flutter/material.dart';
+import 'package:almacen/Modelo/producto_modelo.dart';
 
 class VerProductosController {
-  List<Producto> verProductos() {
-    var productos = Hive.box('productos');
-    if (productos.isNotEmpty) {
-      List<Producto> listaProductos = [];
-      for (var i = 0; i < productos.length; i++) {
+  ValueNotifier<List<Producto>> productos = ValueNotifier<List<Producto>>([]);
+
+  Future<void> actualizarProductos() async {
+    var productosBox = await Hive.openBox('productos');
+    List<Producto> listaProductos = [];
+    for (var key in productosBox.keys) {
+      var producto = productosBox.get(key);
+      if (producto != null) {
         listaProductos.add(
           Producto(
-            id: productos.getAt(i)['id'],
-            nombre: productos.getAt(i)['nombre'],
-            precio: double.parse(productos.getAt(i)['precio']),
+            id: producto['id'],
+            nombre: producto['nombre'],
+            precio: double.parse(
+                producto['precio'].toString()), // Convertir double a String
           ),
         );
       }
-      return listaProductos;
     }
-    return [];
+    productos.value = listaProductos;
+  }
+
+  Future<void> eliminarProducto(int idProducto) async {
+    var productosBox = await Hive.openBox('productos');
+    await productosBox.delete(idProducto);
+    await actualizarProductos(); // Actualiza la lista de productos después de eliminar un producto
   }
 }
