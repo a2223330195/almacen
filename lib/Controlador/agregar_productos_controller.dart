@@ -45,4 +45,29 @@ class AgregarProductosController {
     // Actualizar la lista de productos
     verProductosController.actualizarProductos();
   }
+
+  void modificarProducto({
+    required String id,
+    required String nuevoNombre,
+    required String nuevoPrecio,
+  }) {
+    //1.- validar mis datos (entrada)
+    if (id.isEmpty || nuevoNombre.isEmpty || nuevoPrecio.isEmpty) {
+      throw Exception('Por favor proporciona todos los campos requeridos.');
+    }
+
+    //2.- modificar en la base de datos
+    var productos = Hive.box('productos');
+    productos.put(
+      id,
+      {
+        'id': id,
+        'nombre': nuevoNombre,
+        'precio': nuevoPrecio,
+      },
+    );
+
+    // Actualizar la lista de productos
+    verProductosController.actualizarProductos();
+  }
 }

@@ -38,6 +38,7 @@ dependencies:
   hive_flutter: ^1.1.0
   hive: ^2.2.3
   logging: ^1.0.0
+  simple_search: ^0.1.0
 
 dev_dependencies:
   flutter_test:

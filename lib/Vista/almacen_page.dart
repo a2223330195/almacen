@@ -7,7 +7,7 @@ class AlmacenPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Almacén'),
+        title: const Text('Punto de Venta'),
       ),
       body: Center(
         child: Column(

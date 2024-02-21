@@ -60,15 +60,15 @@ class _BuscarPageState extends State<BuscarPage> {
                 if (productoPorId != null) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(
-                          'Producto encontrado: ${productoPorId['nombre']}'),
+                      content:
+                          Text('Producto encontrado: ${productoPorId.nombre}'),
                     ),
                   );
                 } else if (productoPorNombre != null) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
-                          'Producto encontrado: ${productoPorNombre['nombre']}'),
+                          'Producto encontrado: ${productoPorNombre.nombre}'),
                     ),
                   );
                 } else {

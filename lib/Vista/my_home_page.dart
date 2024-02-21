@@ -53,7 +53,7 @@ class MyHomePageState extends State<MyHomePage> {
               },
             ),
             ElevatedButton(
-              child: const Text('Almacén'),
+              child: const Text('Punto de Venta'),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -62,7 +62,7 @@ class MyHomePageState extends State<MyHomePage> {
               },
             ),
             ElevatedButton(
-              child: const Text('Punto de Venta'),
+              child: const Text('Almacen'),
               onPressed: () {
                 Navigator.push(
                   context,

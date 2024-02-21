@@ -24,7 +24,8 @@ class VerProductosController {
     productos.value = listaProductos;
   }
 
-  Future<void> eliminarProducto(int idProducto) async {
+  Future<void> eliminarProducto(String idProducto) async {
+    // Cambio de int a String
     var productosBox = await Hive.openBox('productos');
     await productosBox.delete(idProducto);
     await actualizarProductos(); // Actualiza la lista de productos después de eliminar un producto
