@@ -5,10 +5,12 @@ class BuscarPage extends StatefulWidget {
   const BuscarPage({Key? key}) : super(key: key);
 
   @override
-  _BuscarPageState createState() => _BuscarPageState();
+  BuscarPageState createState() =>
+      BuscarPageState(); // Corrección del problema 1
 }
 
-class _BuscarPageState extends State<BuscarPage> {
+class BuscarPageState extends State<BuscarPage> {
+  // Corrección del problema 1
   final idController = TextEditingController();
   final nombreController = TextEditingController();
   final buscarProductosController = BuscarProductosController();
@@ -42,9 +44,11 @@ class _BuscarPageState extends State<BuscarPage> {
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () async {
+                final scaffoldMessenger = ScaffoldMessenger.of(context);
+
                 if (idController.text.isEmpty &&
                     nombreController.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
+                  scaffoldMessenger.showSnackBar(
                     const SnackBar(
                       content: Text('Por favor, rellena uno de los campos'),
                     ),
@@ -58,21 +62,21 @@ class _BuscarPageState extends State<BuscarPage> {
                     .buscarProductoPorNombre(nombreController.text);
 
                 if (productoPorId != null) {
-                  ScaffoldMessenger.of(context).showSnackBar(
+                  scaffoldMessenger.showSnackBar(
                     SnackBar(
                       content:
                           Text('Producto encontrado: ${productoPorId.nombre}'),
                     ),
                   );
                 } else if (productoPorNombre != null) {
-                  ScaffoldMessenger.of(context).showSnackBar(
+                  scaffoldMessenger.showSnackBar(
                     SnackBar(
                       content: Text(
                           'Producto encontrado: ${productoPorNombre.nombre}'),
                     ),
                   );
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
+                  scaffoldMessenger.showSnackBar(
                     const SnackBar(
                       content: Text('Producto no encontrado'),
                     ),

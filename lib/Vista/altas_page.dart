@@ -14,48 +14,62 @@ class _AltasPageState extends State<AltasPage> {
   final codigoController = TextEditingController();
   final productoController = TextEditingController();
   final cantidadController = TextEditingController();
+  final stockController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Registrar Venta'),
+        title: const Text('Alta de Productos'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
-                'Introduce el código',
-                style: TextStyle(fontSize: 18),
-              ),
               TextField(
                 controller: codigoController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Introduce el código',
+                ),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
-              const Text(
-                'Introduce el nombre del producto',
-                style: TextStyle(fontSize: 18),
-              ),
               TextField(
                 controller: productoController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Introduce el nombre del producto',
+                ),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
-              const Text(
-                'Introduce el precio a comprar',
-                style: TextStyle(fontSize: 18),
-              ),
               TextField(
                 controller: cantidadController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Introduce el precio a comprar',
+                ),
+                textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 16),
+              TextField(
+                controller: stockController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Introduce el stock',
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 50),
               ElevatedButton(
                 onPressed: () {
                   if (codigoController.text.isEmpty ||
                       productoController.text.isEmpty ||
-                      cantidadController.text.isEmpty) {
+                      cantidadController.text.isEmpty ||
+                      stockController.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Por favor, rellena todos los campos'),
@@ -65,20 +79,23 @@ class _AltasPageState extends State<AltasPage> {
                   }
 
                   double? cantidad = double.tryParse(cantidadController.text);
-                  if (cantidad == null) {
+                  int? stock = int.tryParse(stockController.text);
+                  if (cantidad == null || stock == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content:
-                            Text('Por favor, introduce una cantidad válida'),
+                        content: Text(
+                            'Por favor, introduce una cantidad y stock válidos'),
                       ),
                     );
                     return;
                   }
 
                   agregarProducto(
-                      id: codigoController.text,
-                      nombre: productoController.text,
-                      cantidad: cantidad);
+                    id: codigoController.text,
+                    nombre: productoController.text,
+                    cantidad: cantidad,
+                    stock: stock,
+                  );
 
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
@@ -100,11 +117,13 @@ class _AltasPageState extends State<AltasPage> {
     required String id,
     required String nombre,
     required double cantidad,
+    required int stock,
   }) {
     AgregarProductosController().agregarProducto(
       id: id,
       nombre: nombre,
       precio: cantidad.toString(),
+      stock: stock,
     );
   }
 }

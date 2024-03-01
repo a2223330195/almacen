@@ -6,6 +6,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('productos');
+  await Hive.openBox('venta');
+  await Hive.openBox('ventas');
   runApp(const AlmacenApp());
 }
 
@@ -15,6 +17,7 @@ class AlmacenApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'PUNTO DE VENTA',
       theme: ThemeData(
         primarySwatch: Colors.blue,

@@ -1,7 +1,13 @@
 class Producto {
-  String id;
-  String nombre;
-  double precio;
+  final String id;
+  final String nombre;
+  final double precio;
+  final int stock;
 
-  Producto({required this.id, required this.nombre, required this.precio});
+  Producto({
+    required this.id,
+    required this.nombre,
+    required this.precio,
+    required this.stock,
+  });
 }

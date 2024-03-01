@@ -15,8 +15,8 @@ class VerProductosController {
           Producto(
             id: producto['id'],
             nombre: producto['nombre'],
-            precio: double.parse(
-                producto['precio'].toString()), // Convertir double a String
+            precio: double.parse(producto['precio'].toString()),
+            stock: producto['stock'] ?? 0,
           ),
         );
       }
@@ -25,9 +25,8 @@ class VerProductosController {
   }
 
   Future<void> eliminarProducto(String idProducto) async {
-    // Cambio de int a String
     var productosBox = await Hive.openBox('productos');
     await productosBox.delete(idProducto);
-    await actualizarProductos(); // Actualiza la lista de productos después de eliminar un producto
+    await actualizarProductos();
   }
 }

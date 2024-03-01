@@ -5,13 +5,13 @@ class BajasPage extends StatefulWidget {
   const BajasPage({Key? key}) : super(key: key);
 
   @override
-  _BajasPageState createState() => _BajasPageState();
+  BajasPageState createState() => BajasPageState();
 }
 
-class _BajasPageState extends State<BajasPage> {
+class BajasPageState extends State<BajasPage> {
   final idController = TextEditingController();
   final nombreController = TextEditingController();
-  final agregarProductosController = AgregarProductosController(); // Agregado
+  final agregarProductosController = AgregarProductosController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +52,7 @@ class _BajasPageState extends State<BajasPage> {
                   return;
                 }
 
-                // Aquí debes implementar la lógica para buscar el producto por su nombre o código
-                // y luego llamar al método eliminarProducto
-                agregarProductosController
-                    .eliminarProducto(idController.text); // Agregado
+                agregarProductosController.eliminarProducto(idController.text);
 
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(

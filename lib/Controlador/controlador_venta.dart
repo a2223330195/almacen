@@ -8,11 +8,13 @@ class CarritoController {
     required String id,
     required String nombre,
     required double precio,
+    required int stock,
   }) {
     productos.add(Producto(
       id: id,
       nombre: nombre,
       precio: precio,
+      stock: stock,
     ));
   }
 
@@ -48,6 +50,7 @@ class CarritoController {
       precio: double.parse(
         (Random().nextDouble() * 100).toStringAsFixed(2),
       ),
+      stock: Random().nextInt(100),
     ));
   }
 }

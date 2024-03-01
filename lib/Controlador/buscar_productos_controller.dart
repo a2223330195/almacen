@@ -10,6 +10,7 @@ class BuscarProductosController {
         id: producto['id'],
         nombre: producto['nombre'],
         precio: double.parse(producto['precio'].toString()),
+        stock: producto['stock'],
       );
     } else {
       return null;
@@ -25,6 +26,7 @@ class BuscarProductosController {
           id: producto['id'],
           nombre: producto['nombre'],
           precio: double.parse(producto['precio'].toString()),
+          stock: producto['stock'],
         );
       }
     }
